@@ -36,8 +36,7 @@ namespace HistoricalStart
                     if (transportDepotData.m_TransportType == TransportType.Train)
                     {
                         Mod.Log.Info("unlocking train depot");
-                        EntityManager.RemoveComponent<Locked>(entity);
-                        EntityManager.RemoveComponent<UnlockRequirement>(entity);
+                        Unlock(entity);
                     }
                 }
 
@@ -48,8 +47,7 @@ namespace HistoricalStart
                     if (trackData.m_TrackType == Game.Net.TrackTypes.Train)
                     {
                         Mod.Log.Info("unlocking train track");
-                        EntityManager.RemoveComponent<Locked>(entity);
-                        EntityManager.RemoveComponent<UnlockRequirement>(entity);
+                        Unlock(entity);
                     }
                 }
 
@@ -57,8 +55,7 @@ namespace HistoricalStart
                 else if (EntityManager.HasComponent<WaterwayData>(entity))
                 {
                     Mod.Log.Info("unlocking waterway");
-                    EntityManager.RemoveComponent<Locked>(entity);
-                    EntityManager.RemoveComponent<UnlockRequirement>(entity);
+                    Unlock(entity);
                 }
 
                 // Cargo transport stations.
@@ -68,8 +65,7 @@ namespace HistoricalStart
                     if (transportStationData.m_AircraftRefuelTypes == Game.Vehicles.EnergyTypes.None)
                     {
                         Mod.Log.Info("unlocking cargo transport station");
-                        EntityManager.RemoveComponent<Locked>(entity);
-                        EntityManager.RemoveComponent<UnlockRequirement>(entity);
+                        Unlock(entity);
                     }
                 }
 
@@ -80,8 +76,7 @@ namespace HistoricalStart
                     if (EntityManager.TryGetComponent(entity, out PrefabData prefabData) && _prefabSystem.GetPrefab<PrefabBase>(prefabData) is PrefabBase prefab)
                     {
                         _log.Info("extractor prefab name is " + prefab.name);
-                        EntityManager.RemoveComponent<UnlockRequirement>(entity);
-                        EntityManager.RemoveComponent<Locked>(entity);
+                        Unlock(entity);
                     }
                 }
 
@@ -92,8 +87,8 @@ namespace HistoricalStart
                         || prefab.name.Equals("TransportationGroup") || prefab.name.Equals("Harbor01"))
                     {
                         Mod.Log.Info("unlocking named prefab " + prefab.name);
-                        EntityManager.RemoveComponent<UnlockRequirement>(entity);
-                        EntityManager.RemoveComponent<Locked>(entity);
+                        Unlock(entity);
+
                     }
                 }
             }
@@ -116,6 +111,32 @@ namespace HistoricalStart
             // Set up query.
             _lockedQuery = GetEntityQuery(ComponentType.ReadWrite<Locked>());
             RequireForUpdate(_lockedQuery);
+        }
+
+        /// <summary>
+        /// Unlocks the given entity.
+        /// </summary>
+        /// <param name="entity">Enity to unlock.</param>
+        private void Unlock(Entity entity)
+        {
+            // Unlock entity and remove unlock requirements.
+            EntityManager.RemoveComponent<UnlockRequirement>(entity);
+            EntityManager.RemoveComponent<Locked>(entity);
+
+            // Reduce XP gain.
+            if (EntityManager.TryGetComponent(entity, out PlaceableObjectData placeableData))
+            {
+                _log.Debug("Reducing XP from PlaceableObjectData");
+                placeableData.m_XPReward /= 10;
+                EntityManager.SetComponentData(entity, placeableData);
+            }
+
+            if (EntityManager.TryGetComponent(entity, out ServiceUpgradeData serviceData))
+            {
+                _log.Debug("Reducing XP from ServiceUpgradeData");
+                placeableData.m_XPReward /= 10;
+                EntityManager.SetComponentData(entity, serviceData);
+            }
         }
     }
 }
