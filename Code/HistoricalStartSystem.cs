@@ -18,7 +18,7 @@ namespace HistoricalStart
     {
         // References.
         private ILog _log;
-        private EntityQuery m_lockedQuery;
+        private EntityQuery _lockedQuery;
         private PrefabSystem _prefabSystem;
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace HistoricalStart
         {
             Mod.Log.Info("OnUpdate");
 
-            foreach (Entity entity in m_lockedQuery.ToEntityArray(Allocator.Temp))
+            foreach (Entity entity in _lockedQuery.ToEntityArray(Allocator.Temp))
             {
                 // Train depot.
                 if (EntityManager.TryGetComponent(entity, out TransportDepotData transportDepotData))
@@ -114,8 +114,8 @@ namespace HistoricalStart
             _prefabSystem = World.GetOrCreateSystemManaged<PrefabSystem>();
 
             // Set up query.
-            m_lockedQuery = GetEntityQuery(ComponentType.ReadWrite<Locked>());
-            RequireForUpdate(m_lockedQuery);
+            _lockedQuery = GetEntityQuery(ComponentType.ReadWrite<Locked>());
+            RequireForUpdate(_lockedQuery);
         }
     }
 }
