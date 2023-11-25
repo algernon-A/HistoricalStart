@@ -19,17 +19,28 @@ namespace HistoricalStart
         public const string ModName = "Historical Start";
 
         /// <summary>
+        /// Gets the active instance reference.
+        /// </summary>
+        public static Mod Instance { get; private set; }
+
+        /// <summary>
         /// Gets the mod's active log.
         /// </summary>
-        internal static ILog Log { get; private set; }
+        internal ILog Log { get; private set; }
 
         /// <summary>
         /// Called by the game when the mod is loaded.
         /// </summary>
         public void OnLoad()
         {
+            // Set instance reference.
+            Instance = this;
+
             // Initialize logger.
             Log = LogManager.GetLogger(ModName);
+            Log.Info("setting logging level to Debug");
+            Log.effectivenessLevel = Level.Debug;
+
             Log.Info("loading");
         }
 
