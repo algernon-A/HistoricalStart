@@ -4,6 +4,7 @@
 
 namespace HistoricalStart
 {
+    using System.Reflection;
     using Colossal.Logging;
     using Game;
     using Game.Modding;
@@ -31,26 +32,21 @@ namespace HistoricalStart
         /// <summary>
         /// Called by the game when the mod is loaded.
         /// </summary>
-        public void OnLoad()
+        /// <param name="updateSystem">Game update system.</param>
+        public void OnLoad(UpdateSystem updateSystem)
         {
             // Set instance reference.
             Instance = this;
 
             // Initialize logger.
             Log = LogManager.GetLogger(ModName);
+#if DEBUG
             Log.Info("setting logging level to Debug");
             Log.effectivenessLevel = Level.Debug;
+#endif
+            Log.Info($"loading {ModName} version {Assembly.GetExecutingAssembly().GetName().Version}");
 
-            Log.Info("loading");
-        }
-
-        /// <summary>
-        /// Called by the game when the game world is created.
-        /// </summary>
-        /// <param name="updateSystem">Game update system.</param>
-        public void OnCreateWorld(UpdateSystem updateSystem)
-        {
-            Log.Info("starting OnCreateWorld");
+            // Enable system.
             updateSystem.UpdateAfter<HistoricalStartSystem>(SystemUpdatePhase.Deserialize);
         }
 
