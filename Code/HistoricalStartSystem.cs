@@ -128,7 +128,7 @@ namespace HistoricalStart
             _prefabSystem = World.GetOrCreateSystemManaged<PrefabSystem>();
 
             // Set up query.
-            _lockedQuery = GetEntityQuery(ComponentType.ReadWrite<Locked>());
+            _lockedQuery = SystemAPI.QueryBuilder().WithAllRW<Locked>().Build();
             RequireForUpdate(_lockedQuery);
         }
 
