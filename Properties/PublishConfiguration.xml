@@ -1,0 +1,49 @@
+<Publish>
+  <!--Id must be set in order to update existed mod. it is not required for publishing mod for the first time-->
+  <ModId Value="" />
+  <!--Name of the mod to display to players-->
+  <DisplayName Value="Historical Start" />
+  <!--Short description of the mod-->
+  <ShortDescription Value="Start the game with railways, shipping, and specialized industries unlocked" />
+  <!--Long description of the mod. Single line or multi line. Supports minimal markdown subset-->
+  <!--LongDescription Value="This is a very, very, very long description." /-->
+  <LongDescription>Enables more historical city building when using the game's unlocking progression system by unlocking from the start of the game:
+1. **Rail**
+1. **Shipping**
+1. **Specialized Industry** (farming/mining/logging)
+1. **Budgeting** and the production overview
+
+Also enables placement of **train stations** and **cargo terminals** without having to place a depot first.
+
+This makes it much easier to lay out and grow a city that historically would have been founded prior to the automobile era, and enables you to properly utilize the transportation networks and/or industries those cities would have been originally founded for and developed around.
+
+To (partially) offset this the XP gains for these items have been reduced by 90%, and you will also still need to manually unlock (and spend the point for) the 'Train' progression node in the transportation progression tree if you want to unlock the subsequent nodes.		
+
+## Instructions
+None needed - simply install the mod!  Rail and shipping should be unlocked automatically.
+
+### Modders
+Modders (and aspiring modders!), as always I'm available and happy to chat about what I've done and answer any questions, and also about how you can implement anything that I've done for your own mods.  Come grab me on the Cities: Skylines Modding Discord!
+)</LongDescription>
+  <!--Thumbnail-->
+  <Thumbnail Value="Properties/Thumbnail.png" />
+  <!--Screenshot, can be set multiple-->
+  <Screenshot Value="" />
+  <!--Tag, can be set multiple-->
+  <Tag Value="Code Mod" />
+  <!--Link to the forum post where the mod can be discussed-->
+  <ForumLink Value="" />
+  <!--Version of the mod-->
+  <ModVersion Value="0.9" />
+  <!--Recommended version of the base game to use the mod-->
+  <GameVersion Value="1.0.*" />
+  <!--Dependency for the mod, can be set multiple-->
+  <Dependency Id="" DisplayName="" Version="" />
+  <!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
+  <ChangeLog Value="Update publish configuration." />
+  <!--ChangeLog>
+	</ChangeLog-->
+  <!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
+  <ExternalLink Type="github" Url="https://github.com/algernon-A/HistoricalStart" />
+  <ExternalLink Type="discord" Url="https://discord.gg/7rTsfUdfTf" />
+</Publish>

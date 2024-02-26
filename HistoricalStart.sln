@@ -1,22 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.7.34221.43
+VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HistoricalStart", "HistoricalStart.csproj", "{BBD3D080-B153-49CC-9C7A-D7F0F7CF8999}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HistoricalStart", "HistoricalStart.csproj", "{EA59DEEF-6001-47E1-83E0-2827B100D04F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Steam|Any CPU = Steam|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BBD3D080-B153-49CC-9C7A-D7F0F7CF8999}.Steam|Any CPU.ActiveCfg = Steam|Any CPU
-		{BBD3D080-B153-49CC-9C7A-D7F0F7CF8999}.Steam|Any CPU.Build.0 = Steam|Any CPU
+		{EA59DEEF-6001-47E1-83E0-2827B100D04F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA59DEEF-6001-47E1-83E0-2827B100D04F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA59DEEF-6001-47E1-83E0-2827B100D04F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA59DEEF-6001-47E1-83E0-2827B100D04F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {602B69E2-D477-4596-8DC9-37F24A2A53AB}
+		SolutionGuid = {1E5F8652-9F1C-4159-B186-A9BDE7023342}
 	EndGlobalSection
 EndGlobal
