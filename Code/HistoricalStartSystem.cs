@@ -26,8 +26,6 @@ namespace HistoricalStart
         /// </summary>
         protected override void OnUpdate()
         {
-            _log.Info("OnUpdate");
-
             foreach (Entity entity in _lockedQuery.ToEntityArray(Allocator.Temp))
             {
                 // Train depot.
@@ -35,7 +33,7 @@ namespace HistoricalStart
                 {
                     if (transportDepotData.m_TransportType == TransportType.Train)
                     {
-                        _log.Info("unlocking train depot");
+                        _log.Debug("unlocking train depot");
                         Unlock(entity);
                     }
                 }
@@ -46,7 +44,7 @@ namespace HistoricalStart
                     // Only train tracks.
                     if (trackData.m_TrackType == Game.Net.TrackTypes.Train)
                     {
-                        _log.Info("unlocking train track");
+                        _log.Debug("unlocking train track");
                         Unlock(entity);
                     }
                 }
@@ -54,7 +52,7 @@ namespace HistoricalStart
                 // Ship paths.
                 else if (EntityManager.HasComponent<WaterwayData>(entity))
                 {
-                    _log.Info("unlocking waterway");
+                    _log.Debug("unlocking waterway");
                     Unlock(entity);
                 }
 
@@ -64,7 +62,7 @@ namespace HistoricalStart
                     // Exclude airports.
                     if (transportStationData.m_AircraftRefuelTypes == Game.Vehicles.EnergyTypes.None)
                     {
-                        _log.Info("unlocking cargo transport station");
+                        _log.Debug("unlocking cargo transport station");
                         Unlock(entity);
                     }
                 }
@@ -72,23 +70,42 @@ namespace HistoricalStart
                 // Specialized industry.
                 else if (EntityManager.TryGetComponent(entity, out PlaceholderBuildingData placeholderData) && placeholderData.m_Type == BuildingType.ExtractorBuilding)
                 {
-                    _log.Info("unlocking extractor");
-                    if (EntityManager.TryGetComponent(entity, out PrefabData prefabData) && _prefabSystem.GetPrefab<PrefabBase>(prefabData) is PrefabBase prefab)
+                    _log.Debug("unlocking extractor");
+                    Unlock(entity);
+                }
+
+                // Transport lines.
+                else if (EntityManager.TryGetComponent(entity, out TransportLineData transportLineData))
+                {
+                    if (transportLineData.m_TransportType == TransportType.Train || transportLineData.m_TransportType == TransportType.Ship)
                     {
-                        _log.Info("extractor prefab name is " + prefab.name);
+                        _log.Debug("unlocking transport line");
                         Unlock(entity);
                     }
                 }
 
                 // Specifically named prefabs.
-                else if (EntityManager.TryGetComponent(entity, out PrefabData prefabData) && _prefabSystem.GetPrefab<PrefabBase>(prefabData) is PrefabBase prefab)
+                else if (EntityManager.TryGetComponent(entity, out PrefabData prefabData) && prefabData.m_Index > 0 && _prefabSystem.GetPrefab<PrefabBase>(prefabData) is PrefabBase prefab)
                 {
-                    if (prefab.name.Equals("TransportationTrain") || prefab.name.Equals("TrainStation01") || prefab.name.Equals("ZonesExtractors") || prefab.name.Equals("TransportationWater") || prefab.name.Equals("WaterTransportationGroup")
-                        || prefab.name.Equals("TransportationGroup") || prefab.name.Equals("Harbor01"))
+                    switch (prefab.name)
                     {
-                        _log.Info("unlocking named prefab " + prefab.name);
-                        Unlock(entity);
-
+                        case "Harbor01":
+                        case "TrainStation01":
+                        case "TransportationGroup":
+                        case "TransportationTrain":
+                        case "TransportationWater":
+                        case "WaterTransportationGroup":
+                        case "ZonesExtractors":
+                        case "Budget":
+                        case "City Budget":
+                        case "Taxation":
+                        case "Loans":
+                        case "Service Budgets":
+                        case "Production Panel":
+                        case "Transportation":
+                            _log.Debug($"unlocking named prefab {prefab.name}");
+                            Unlock(entity);
+                            break;
                     }
                 }
             }
@@ -116,7 +133,7 @@ namespace HistoricalStart
         /// <summary>
         /// Unlocks the given entity.
         /// </summary>
-        /// <param name="entity">Enity to unlock.</param>
+        /// <param name="entity">Entity to unlock.</param>
         private void Unlock(Entity entity)
         {
             // Unlock entity and remove unlock requirements.
