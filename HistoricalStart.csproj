@@ -41,6 +41,6 @@
 	</ItemGroup>
 
 	<Target Name="SetDescription" BeforeTargets="BeforeBuild">
-		<XmlPoke XmlInputPath="$(PublishConfigurationPath)" Value="$([System.IO.File]::ReadAllText($(ProjectDir)/Properties/LongDescription.md)))" Query="//LongDescription" />
+		<XmlPoke XmlInputPath="$(PublishConfigurationPath)" Value="$([System.IO.File]::ReadAllText($(ProjectDir)/Properties/LongDescription.md))" Query="//LongDescription" />
 	</Target>
 </Project>
