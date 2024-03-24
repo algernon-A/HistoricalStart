@@ -58,6 +58,7 @@ namespace HistoricalStart
         public void OnDispose()
         {
             Log.Info("disposing");
+            Instance = null;
         }
     }
 }
