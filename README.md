@@ -1,4 +1,4 @@
-## Image Overlay
+## Historical Start
 A mod for Cities: Skylines 2.  Available for download only on [Paradox Mods](https://mods.paradoxplaza.com/mods/74535/Windows).
 
 The primary platform for support is the [Cities Skylines Modding Discord](https://discord.gg/HTav7ARPs2).
