@@ -8,6 +8,7 @@ Enables more historical city building when using the game's unlocking progressio
 1. **Shipping**
 1. **Specialized Industry** (farming/mining/logging)
 1. **Budgeting** and the production overview
+1. The **Natural Resources Infoview**
 
 Also enables placement of **train stations** and **cargo terminals** without having to place a depot first.
 
@@ -26,10 +27,10 @@ Modders (and aspiring modders!), as always I'm available and happy to chat about
   <Screenshot Value="Properties/Screenshots/RailTransportation.jpg" />
   <Tag Value="Code Mod" />
   <ForumLink Value="https://forum.paradoxplaza.com/forum/threads/historical-start.1644737/" />
-  <ModVersion Value="1.0" />
+  <ModVersion Value="1.0.1" />
   <GameVersion Value="1.1.*" />
   <Dependency Id="" DisplayName="" Version="" />
-  <ChangeLog Value="Update publish configuration.">- Release version.</ChangeLog>
+  <ChangeLog Value="Update publish configuration.">- Unlock natural resources infoview from the start.</ChangeLog>
   <ExternalLink Type="github" Url="https://github.com/algernon-A/HistoricalStart" />
   <ExternalLink Type="discord" Url="https://discord.gg/HTav7ARPs2" />
 </Publish>

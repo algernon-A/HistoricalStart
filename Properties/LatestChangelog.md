@@ -1,1 +1,1 @@
-- Release version.
+- Unlock natural resources infoview from the start.

@@ -105,6 +105,7 @@ namespace HistoricalStart
                         case "Service Budgets":
                         case "Production Panel":
                         case "Transportation":
+                        case "Extractors":
                             _log.Debug($"unlocking named prefab {prefab.name}");
                             Unlock(entity);
                             break;
