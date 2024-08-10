@@ -1,1 +1,1 @@
-- Unlock natural resources infoview from the start.
+- Add small and medium train stations and 2- and 3-lane two-way highways to the unlock list.
