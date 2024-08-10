@@ -2,6 +2,7 @@
 Enables more historical city building when using the game's unlocking progression system by unlocking from the start of the game:
 1. **Rail**
 1. **Shipping**
+1. **Small highways** (2- and 3-lane two-way highways)
 1. **Specialized Industry** (farming/mining/logging)
 1. **Budgeting** and the production overview
 1. The **Natural Resources Infoview**
