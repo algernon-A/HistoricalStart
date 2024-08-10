@@ -87,12 +87,16 @@ namespace HistoricalStart
                 }
 
                 // Specifically named prefabs.
-                else if (EntityManager.TryGetComponent(entity, out PrefabData prefabData) && prefabData.m_Index > 0 && _prefabSystem.GetPrefab<PrefabBase>(prefabData) is PrefabBase prefab)
+                else if (EntityManager.TryGetComponent(entity, out PrefabData prefabData) && prefabData.m_Index > 0 && _prefabSystem.GetPrefab<PrefabBase>(prefabData) is PrefabBase prefab && !string.IsNullOrEmpty(prefab.name))
                 {
                     switch (prefab.name)
                     {
                         case "Harbor01":
+                        case "Highway Twoway - 2 lanes":
+                        case "Highway Twoway - 3 lanes":
                         case "TrainStation01":
+                        case "TrainStation02":
+                        case "TrainStation03":
                         case "TransportationGroup":
                         case "TransportationTrain":
                         case "TransportationWater":
@@ -108,6 +112,9 @@ namespace HistoricalStart
                         case "Extractors":
                             _log.Debug($"unlocking named prefab {prefab.name}");
                             Unlock(entity);
+                            break;
+                        default:
+                            _log.Debug($"Found unidentified prefab {prefab.name}");
                             break;
                     }
                 }
