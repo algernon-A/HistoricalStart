@@ -28,10 +28,10 @@ Modders (and aspiring modders!), as always I'm available and happy to chat about
   <Screenshot Value="Properties/Screenshots/RailTransportation.jpg" />
   <Tag Value="Code Mod" />
   <ForumLink Value="https://forum.paradoxplaza.com/forum/threads/historical-start.1644737/" />
-  <ModVersion Value="1.1" />
+  <ModVersion Value="1.1.1" />
   <GameVersion Value="1.1.*" />
   <Dependency Id="" DisplayName="" Version="" />
-  <ChangeLog Value="Add small and medium train stations and 2- and 3-lane two-way highways to the unlock list.">Add small and medium train stations and 2- and 3-lane two-way highways to the unlock list.</ChangeLog>
+	<ChangeLog>Remove redundant UI unlocks.</ChangeLog>
   <ExternalLink Type="github" Url="https://github.com/algernon-A/HistoricalStart" />
   <ExternalLink Type="discord" Url="https://discord.gg/HTav7ARPs2" />
   <ExternalLink Type="kofi" Url="https://ko-fi.com/algernon" />
