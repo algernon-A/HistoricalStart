@@ -1,3 +1,6 @@
+### 1.1.1.1
+- Update compatibility info for game version 1.2.0.
+
 ### 1.1.1
 - Remove redundant UI unlocks.
 

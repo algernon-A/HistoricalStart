@@ -1,1 +1,1 @@
-Remove redundant UI unlocks.
+- Update compatibility info for game version 1.2.0.
