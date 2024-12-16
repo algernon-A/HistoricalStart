@@ -7,6 +7,7 @@
 namespace HistoricalStart
 {
     using System.Reflection;
+    using Colossal.IO.AssetDatabase;
     using Colossal.Logging;
     using Game;
     using Game.Modding;
@@ -32,6 +33,11 @@ namespace HistoricalStart
         internal ILog Log { get; private set; }
 
         /// <summary>
+        /// Gets the mod's active settings configuration.
+        /// </summary>
+        internal ModSettings ActiveSettings { get; private set; }
+
+        /// <summary>
         /// Called by the game when the mod is loaded.
         /// </summary>
         /// <param name="updateSystem">Game update system.</param>
@@ -47,6 +53,16 @@ namespace HistoricalStart
             Log.effectivenessLevel = Level.Debug;
 #endif
             Log.Info($"loading {ModName} version {Assembly.GetExecutingAssembly().GetName().Version}");
+
+            // Register mod settings to game options UI.
+            ActiveSettings = new (this);
+            ActiveSettings.RegisterInOptionsUI();
+
+            // Load translations.
+            Localization.LoadTranslations(ActiveSettings, Log);
+
+            // Load saved settings.
+            AssetDatabase.global.LoadSettings("529TileSettings", ActiveSettings, new ModSettings(this));
 
             // Enable system.
             updateSystem.UpdateAfter<HistoricalStartSystem>(SystemUpdatePhase.Deserialize);

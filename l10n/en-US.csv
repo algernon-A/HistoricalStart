@@ -1,0 +1,4 @@
+﻿"Options.SECTION:[algernon.HistoricalStart]","Historical Start"
+"Options.OPTION:ResetModSettings","Reset to default"
+"Options.OPTION_DESCRIPTION:ResetModSettings","Resets all Historical Start mod settings to default."
+"Options.WARNING:ResetModSettings","Reset all Historical Start settings to default?  This cannot be undone."

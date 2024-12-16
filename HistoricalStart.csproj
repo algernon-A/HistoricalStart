@@ -6,7 +6,7 @@
 		<Authors>algernon</Authors>
 		<Copyright>Copyright © 2023-24 algernon</Copyright>
 		<Product>$(Title)</Product>
-		<Version>1.1.1.1</Version>
+		<Version>1.1.99</Version>
 		<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<TargetFramework>net472</TargetFramework>
@@ -18,6 +18,9 @@
 	<Import Project="Config/References.csproj" />
 	<Import Project="$([System.Environment]::GetEnvironmentVariable('CSII_TOOLPATH', 'EnvironmentVariableTarget.User'))\Mod.props" />
 	<Import Project="$([System.Environment]::GetEnvironmentVariable('CSII_TOOLPATH', 'EnvironmentVariableTarget.User'))\Mod.targets" />
+	<ItemGroup>
+	  <None Remove="l10n\en-US.csv" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="$(ModPropsFile)" Link="Properties/Mod.props" />
@@ -28,6 +31,10 @@
 		<None Include="Config/References.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<EmbeddedResource Include="l10n\en-US.csv" />
+	</ItemGroup>
+	
 	<ItemGroup>
 		<AdditionalFiles Include="stylecop.json" />
 	</ItemGroup>
