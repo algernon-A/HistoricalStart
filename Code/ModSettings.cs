@@ -24,7 +24,13 @@ namespace HistoricalStart
         public ModSettings(IMod mod)
             : base(mod)
         {
+            SetDefaults();
         }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether buses should be unlocked on load.
+        /// </summary>
+        public bool UnlockBus { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether trams should be unlocked on load.
@@ -90,6 +96,7 @@ namespace HistoricalStart
         /// </summary>
         public override void SetDefaults()
         {
+            UnlockBus = false;
             UnlockTrams = false;
             UnlockTrains = true;
             UnlockShips = true;

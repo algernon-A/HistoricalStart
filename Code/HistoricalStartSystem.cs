@@ -34,6 +34,7 @@ namespace HistoricalStart
             ModSettings currentSettings = Mod.Instance.ActiveSettings;
 
             // Set unlocks.
+            bool unlockBus = currentSettings.UnlockBus;
             bool unlockTrams = currentSettings.UnlockTrams;
             bool unlockTrains = currentSettings.UnlockTrains;
             bool unlockShips = currentSettings.UnlockShips;
@@ -43,9 +44,7 @@ namespace HistoricalStart
             bool unlockBasicHighways = currentSettings.UnlockBasicHighways | currentSettings.UnlockAllHighways;
             bool unlockAllHighways = currentSettings.UnlockAllHighways;
             bool unlockingProduction = unlockFarming | unlockMining | unlockOil;
-            bool unlockingTransport = unlockShips | unlockTrains | unlockTrams;
-
-            _log.Debug($"Loading with trains {unlockTrains} ships {unlockShips} mining {unlockMining} farming {unlockFarming} oil {unlockOil} transport {unlockingTransport}");
+            bool unlockingTransport = unlockBus | unlockTrams | unlockTrains | unlockShips;
 
             // Entity references.
             Entity transportationServiceEntity = Entity.Null;
@@ -173,6 +172,17 @@ namespace HistoricalStart
 
                             switch (requirementPrefabName)
                             {
+                                // Buses.
+                                case "BasicTransportationNode":
+                                case "Bus Depot Built Req":
+                                    if (unlockBus)
+                                    {
+                                        _log.Info($"Unlocking bus prefab {entityPrefabName} {entity}");
+                                        Unlock(entity);
+                                    }
+
+                                    continue;
+
                                 // Trams.
                                 case "TransportationTram":
                                 case "Tram Depot Built Req":
