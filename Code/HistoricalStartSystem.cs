@@ -86,7 +86,7 @@ namespace HistoricalStart
             // Now iterate through all enities in our main query.
             foreach (Entity entity in _lockedQuery.ToEntityArray(Allocator.Temp))
             {
-                string entityPrefabName = GetEntityPrefab(entity);
+                string entityPrefabName = GetEntityPrefabName(entity);
 
                 switch (entityPrefabName)
                 {
@@ -162,11 +162,13 @@ namespace HistoricalStart
                     // Get unlock requirements and iterate through.
                     if (EntityManager.TryGetBuffer(entity, true, out DynamicBuffer<UnlockRequirement> unlockRequirements))
                     {
-                        for (int i = 0; i < unlockRequirements.Length; ++i)
+                        // We can skip the Transport service unlock requirement swap if we're directly unlocking this entity.
+                        bool skipReplacement = false;
+                        for (int i = 0; i < unlockRequirements.Length && !skipReplacement; ++i)
                         {
                             UnlockRequirement requirement = unlockRequirements[i];
 
-                            string requirementPrefabName = GetEntityPrefab(requirement.m_Prefab);
+                            string requirementPrefabName = GetEntityPrefabName(requirement.m_Prefab);
 
                             _log.Debug($"...... requirement name {requirementPrefabName}");
 
@@ -174,22 +176,26 @@ namespace HistoricalStart
                             {
                                 // Buses.
                                 case "BasicTransportationNode":
+                                case "Bus Station Built Req":
                                 case "Bus Depot Built Req":
                                     if (unlockBus)
                                     {
                                         _log.Info($"Unlocking bus prefab {entityPrefabName} {entity}");
                                         Unlock(entity);
+                                        skipReplacement = true;
                                     }
 
                                     continue;
 
                                 // Trams.
                                 case "TransportationTram":
+                                case "Tram Stop Built Req":
                                 case "Tram Depot Built Req":
                                     if (unlockTrams)
                                     {
                                         _log.Info($"Unlocking tram prefab {entityPrefabName} {entity}");
                                         Unlock(entity);
+                                        skipReplacement = true;
                                     }
 
                                     continue;
@@ -203,6 +209,7 @@ namespace HistoricalStart
                                     {
                                         _log.Info($"Unlocking rail prefab {entityPrefabName} {entity}");
                                         Unlock(entity);
+                                        skipReplacement = true;
                                     }
 
                                     continue;
@@ -215,6 +222,7 @@ namespace HistoricalStart
                                     {
                                         _log.Info($"Unlocking shipping prefab {entityPrefabName} {entity}");
                                         Unlock(entity);
+                                        skipReplacement = true;
                                     }
 
                                     continue;
@@ -224,6 +232,7 @@ namespace HistoricalStart
                                     {
                                         _log.Info($"Unlocking highway prefab {entityPrefabName} {entity}");
                                         Unlock(entity);
+                                        skipReplacement = true;
                                     }
 
                                     continue;
@@ -299,7 +308,7 @@ namespace HistoricalStart
         /// </summary>
         /// <param name="entity">Entity.</param>
         /// <returns>Entity prefab name, or <see cref="string.Empty"/> if the entity doesn't contain a prefab or the prefab reference was invalid.</returns>
-        private string GetEntityPrefab(Entity entity)
+        private string GetEntityPrefabName(Entity entity)
         {
             if (EntityManager.TryGetComponent(entity, out PrefabData entityPrefabData)
                     && entityPrefabData.m_Index > 0
