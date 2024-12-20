@@ -195,7 +195,6 @@ namespace HistoricalStart
                                     continue;
 
                                 // Rail.
-                                case "TrainNode":
                                 case "TransportationTrain":
                                 case "Train Track Built Req":
                                 case "Passenger Train Station Built Req":
@@ -210,7 +209,6 @@ namespace HistoricalStart
 
                                 // Shipping.
                                 case "TransportationWater":
-                                case "HarborNode":
                                 case "Passenger Harbor Built Req":
                                 case "Cargo Harbor Built Req":
                                     if (unlockShips)

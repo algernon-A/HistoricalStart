@@ -4,22 +4,30 @@ A mod for Cities: Skylines 2.  Available for download only on [Paradox Mods](htt
 The primary platform for support is the [Cities Skylines Modding Discord](https://discord.gg/HTav7ARPs2).
 
 ### Features
-Enables more historical city building when using the game's unlocking progression system by unlocking from the start of the game:
-1. **Rail**
-1. **Shipping**
-1. **Small highways** (2- and 3-lane two-way highways)
-1. **Specialized Industry** (farming/mining/logging)
-1. **Budgeting** and the production overview
-1. The **Natural Resources Infoview**
+Enables more historical city building when using the game's unlocking progression system by unlocking selected categories at the start of a game.  These categories can be set in the mod's options panel and include:
+1. **Buses**
+1. **Trams**
+1. **Rail** (enabled by default)
+1. **Shipping** (enabled by default)
+1. **Small highways** (2- and 3-lane two-way highways, enabled by default)
+1. **All highways**
+1. **Advanced farming** (vegetables and cotton)
+1. **Mining*** (coal and ore)
+1. **Oil drilling**
 
-Also enables placement of **train stations** and **cargo terminals** without having to place a depot first.
+Supporting features will also be unlocked where appropriate, for example:
+1. The **Transportation budget**
+1. The **Natural Resources Infoview**
+1. The **Transport routes overview**
+
+When a public transport category is unlocked, this mod also makes it possible to place infrastructure **without needing to build a depot first** (a depot will still be needed at some point if you wish to run transport lines).
 
 This makes it much easier to lay out and grow a city that historically would have been founded prior to the automobile era, and enables you to properly utilize the transportation networks and/or industries those cities would have been originally founded for and developed around.
 
-To (partially) offset this the XP gains for these items have been reduced by 90%, and you will also still need to manually unlock (and spend the point for) the 'Train' progression node in the transportation progression tree if you want to unlock the subsequent nodes.		
+To (partially) offset any unlocks, the XP gains for unlocked items will be reduced by 90%, and you will also still need to manually unlock (and spend the point for) the relevant progression node in the progression tree if you want to unlock the subsequent nodes.		
 
 ### Instructions
-None needed - simply install the mod!  Rail and shipping should be unlocked automatically.
+Rail, shipping, and basic highways will be unlocked by default when you install the mod.  These can be disabled (and/or other categories enabled) in the mod's options menu entry.
 
 ## Meta
 ### Translations
