@@ -24,8 +24,8 @@ To (partially) offset any unlocks, the XP gains for unlocked items will be reduc
 ### Instructions
 Rail, shipping, and basic highways will be unlocked by default when you install the mod.  These can be disabled (and/or other categories enabled) in the mod's options menu entry.
 
-## Instructions
-None needed - simply install the mod!  Rail and shipping should be unlocked automatically.
+## Meta
+Safe to remove at any time.  Anything that's been unlocked in a save will remain unlocked for that save.
 
 ### Modders
 Modders (and aspiring modders!), as always I'm available and happy to chat about what I've done and answer any questions, and also about how you can implement anything that I've done for your own mods.  Come grab me on the Cities: Skylines Modding Discord!

@@ -30,6 +30,8 @@ To (partially) offset any unlocks, the XP gains for unlocked items will be reduc
 Rail, shipping, and basic highways will be unlocked by default when you install the mod.  These can be disabled (and/or other categories enabled) in the mod's options menu entry.
 
 ## Meta
+Safe to remove at any time.  Anything that's been unlocked in a save will remain unlocked for that save.
+
 ### Translations
 This mod supports localization via a [CrowdIn project](https://crowdin.com/project/historical-start-cs2).  Please help out if you can!
 
