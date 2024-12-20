@@ -21,6 +21,10 @@ To (partially) offset this the XP gains for these items have been reduced by 90%
 ### Instructions
 None needed - simply install the mod!  Rail and shipping should be unlocked automatically.
 
+## Meta
+### Translations
+This mod supports localization via a [CrowdIn project](https://crowdin.com/project/historical-start-cs2).  Please help out if you can!
+
 ### Modders
 Modders (and aspiring modders!), as always I'm available and happy to chat about what I've done and answer any questions, and also about how you can implement anything that I've done for your own mods.  Come grab me on the [Cities Skylines Modding Discord](https://discord.gg/HTav7ARPs2)!
 

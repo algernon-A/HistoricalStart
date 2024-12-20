@@ -21,6 +21,8 @@ namespace HistoricalStart
         // References.
         private ILog _log;
         private EntityQuery _lockedQuery;
+        private EntityQuery _serviceQuery;
+        private EntityQuery _milestoneQuery;
         private PrefabSystem _prefabSystem;
 
         /// <summary>
@@ -28,89 +30,208 @@ namespace HistoricalStart
         /// </summary>
         protected override void OnUpdate()
         {
-            foreach (Entity entity in _lockedQuery.ToEntityArray(Allocator.Temp))
+            // Get current settings.
+            ModSettings currentSettings = Mod.Instance.ActiveSettings;
+
+            // Set unlocks.
+            bool unlockTrams = currentSettings.UnlockTrams;
+            bool unlockTrains = currentSettings.UnlockTrains;
+            bool unlockShips = currentSettings.UnlockShips;
+            bool unlockFarming = currentSettings.UnlockFarming;
+            bool unlockMining = currentSettings.UnlockMining;
+            bool unlockOil = currentSettings.UnlockOil;
+            bool unlockBasicHighways = currentSettings.UnlockBasicHighways | currentSettings.UnlockAllHighways;
+            bool unlockAllHighways = currentSettings.UnlockAllHighways;
+            bool unlockingProduction = unlockFarming | unlockMining | unlockOil;
+            bool unlockingTransport = unlockShips | unlockTrains | unlockTrams;
+
+            _log.Debug($"Loading with trains {unlockTrains} ships {unlockShips} mining {unlockMining} farming {unlockFarming} oil {unlockOil} transport {unlockingTransport}");
+
+            // Entity references.
+            Entity transportationServiceEntity = Entity.Null;
+            Entity milestone4Entity = Entity.Null;
+
+            // Set up for Transport service unlock requirement replacement if we're unlocking the transportation budget.
+            if (unlockingTransport)
             {
-                // Train depot.
-                if (EntityManager.TryGetComponent(entity, out TransportDepotData transportDepotData))
+                // Get milestone 4 entity.
+                foreach (Entity entity in _milestoneQuery.ToEntityArray(Allocator.Temp))
                 {
-                    if (transportDepotData.m_TransportType == TransportType.Train)
+                    if (EntityManager.TryGetComponent(entity, out MilestoneData milestoneData) && milestoneData.m_Index == 4)
                     {
-                        _log.Debug("unlocking train depot");
-                        Unlock(entity);
+                        _log.Debug($"Found milestone {milestoneData.m_Index} entity {entity}");
+                        milestone4Entity = entity;
+                        break;
                     }
                 }
 
-                // Train tracks.
-                else if (EntityManager.TryGetComponent(entity, out TrackData trackData))
+                // If we found the milestone entity, get (and unlock) the Transportation service entity.
+                if (milestone4Entity != Entity.Null)
                 {
-                    // Only train tracks.
-                    if (trackData.m_TrackType == Game.Net.TrackTypes.Train)
+                    foreach (Entity entity in _serviceQuery.ToEntityArray(Allocator.Temp))
                     {
-                        _log.Debug("unlocking train track");
-                        Unlock(entity);
-                    }
-                }
-
-                // Ship paths.
-                else if (EntityManager.HasComponent<WaterwayData>(entity))
-                {
-                    _log.Debug("unlocking waterway");
-                    Unlock(entity);
-                }
-
-                // Cargo transport stations.
-                else if (EntityManager.HasComponent<CargoTransportStationData>(entity) && EntityManager.TryGetComponent(entity, out TransportStationData transportStationData))
-                {
-                    // Exclude airports.
-                    if (transportStationData.m_AircraftRefuelTypes == Game.Vehicles.EnergyTypes.None)
-                    {
-                        _log.Debug("unlocking cargo transport station");
-                        Unlock(entity);
-                    }
-                }
-
-                // Specialized industry.
-                else if (EntityManager.TryGetComponent(entity, out PlaceholderBuildingData placeholderData) && placeholderData.m_Type == BuildingType.ExtractorBuilding)
-                {
-                    _log.Debug("unlocking extractor");
-                    Unlock(entity);
-                }
-
-                // Transport lines.
-                else if (EntityManager.TryGetComponent(entity, out TransportLineData transportLineData))
-                {
-                    if (transportLineData.m_TransportType == TransportType.Train || transportLineData.m_TransportType == TransportType.Ship)
-                    {
-                        _log.Debug("unlocking transport line");
-                        Unlock(entity);
-                    }
-                }
-
-                // Specifically named prefabs.
-                else if (EntityManager.TryGetComponent(entity, out PrefabData prefabData) && prefabData.m_Index > 0 && _prefabSystem.GetPrefab<PrefabBase>(prefabData) is PrefabBase prefab && !string.IsNullOrEmpty(prefab.name))
-                {
-                    switch (prefab.name)
-                    {
-                        case "Harbor01":
-                        case "Highway Twoway - 2 lanes":
-                        case "Highway Twoway - 3 lanes":
-                        case "TrainStation01":
-                        case "TrainStation02":
-                        case "TrainStation03":
-                        case "ZonesExtractors":
-                        case "Budget":
-                        case "City Budget":
-                        case "Taxation":
-                        case "Loans":
-                        case "Service Budgets":
-                        case "Production Panel":
-                        case "Extractors":
-                            _log.Debug($"unlocking named prefab {prefab.name}");
+                        if (EntityManager.TryGetComponent(entity, out ServiceData serviceData) && serviceData.m_Service == Game.City.CityService.Transportation)
+                        {
+                            _log.Debug($"Found {serviceData.m_Service} entity {entity}");
+                            transportationServiceEntity = entity;
                             Unlock(entity);
                             break;
-                        default:
-                            _log.Debug($"Found unidentified prefab {prefab.name}");
-                            break;
+                        }
+                    }
+                }
+            }
+
+            // Determine if we're going ahead with Transport service unlock requriement replacement (requires having found both milestone and service entity).
+            bool replacingEntities = unlockingTransport & transportationServiceEntity != Entity.Null & milestone4Entity != Entity.Null;
+
+            // Now iterate through all enities in our main query.
+            foreach (Entity entity in _lockedQuery.ToEntityArray(Allocator.Temp))
+            {
+                string entityPrefabName = GetEntityPrefab(entity);
+
+                switch (entityPrefabName)
+                {
+                    // General transport-related prefabs (e.g. budgets, transport overview) if needed.
+                    case "Budget":
+                    case "City Budget":
+                    case "Service Budgets":
+                    case "Transportation Overview":
+                        if (unlockingTransport)
+                        {
+                            _log.Info($"Unlocking Transportation service-related prefab {entityPrefabName} {entity}");
+                            Unlock(entity);
+                        }
+
+                        continue;
+
+                    // Advanced farming.
+                    case "Agriculture Area Placeholder - Vegetable":
+                    case "Agriculture Area Placeholder - Cotton":
+
+                        if (unlockFarming)
+                        {
+                            _log.Info($"Unlocking farming prefab {entityPrefabName} {entity}");
+                            Unlock(entity);
+                        }
+
+                        continue;
+
+                    // Oil.
+                    case "Oil Area Placeholder":
+                        if (unlockOil)
+                        {
+                            _log.Info($"Unlocking oil prefab {entityPrefabName} {entity}");
+                            Unlock(entity);
+                        }
+
+                        continue;
+
+                    // Mining.
+                    case "Ore Area Placeholder - Ore":
+                    case "Ore Area Placeholder - Coal":
+                        if (unlockMining)
+                        {
+                            _log.Info($"Unlocking mining prefab {entityPrefabName} {entity}");
+                            Unlock(entity);
+                        }
+
+                        continue;
+
+                    // General resource extraction.
+                    case "Production Panel":
+                        if (unlockingProduction)
+                        {
+                            _log.Info($"Unlocking production prefab {entityPrefabName} {entity}");
+                            Unlock(entity);
+                        }
+
+                        continue;
+
+                    case "Highway Twoway - 2 lanes":
+                    case "Highway Twoway - 3 lanes":
+                        if (unlockBasicHighways)
+                        {
+                            _log.Info($"Unlocking basic highway {entityPrefabName} {entity}");
+                            Unlock(entity);
+                        }
+
+                        continue;
+                }
+
+                if (unlockingTransport | unlockAllHighways)
+                {
+                    // Get unlock requirements and iterate through.
+                    if (EntityManager.TryGetBuffer(entity, true, out DynamicBuffer<UnlockRequirement> unlockRequirements))
+                    {
+                        for (int i = 0; i < unlockRequirements.Length; ++i)
+                        {
+                            UnlockRequirement requirement = unlockRequirements[i];
+
+                            string requirementPrefabName = GetEntityPrefab(requirement.m_Prefab);
+
+                            _log.Debug($"...... requirement name {requirementPrefabName}");
+
+                            switch (requirementPrefabName)
+                            {
+                                // Trams.
+                                case "TransportationTram":
+                                case "Tram Depot Built Req":
+                                    if (unlockTrams)
+                                    {
+                                        _log.Info($"Unlocking tram prefab {entityPrefabName} {entity}");
+                                        Unlock(entity);
+                                    }
+
+                                    continue;
+
+                                // Rail.
+                                case "TrainNode":
+                                case "TransportationTrain":
+                                case "Train Track Built Req":
+                                case "Passenger Train Station Built Req":
+                                case "Cargo Train Terminal Built Req":
+                                    if (unlockTrains)
+                                    {
+                                        _log.Info($"Unlocking rail prefab {entityPrefabName} {entity}");
+                                        Unlock(entity);
+                                    }
+
+                                    continue;
+
+                                // Shipping.
+                                case "TransportationWater":
+                                case "HarborNode":
+                                case "Passenger Harbor Built Req":
+                                case "Cargo Harbor Built Req":
+                                    if (unlockShips)
+                                    {
+                                        _log.Info($"Unlocking shipping prefab {entityPrefabName} {entity}");
+                                        Unlock(entity);
+                                    }
+
+                                    continue;
+
+                                case "RoadsHighways":
+                                    if (unlockAllHighways)
+                                    {
+                                        _log.Info($"Unlocking highway prefab {entityPrefabName} {entity}");
+                                        Unlock(entity);
+                                    }
+
+                                    continue;
+                            }
+
+                            // If not one of the above named prefabs, perform Transport service unlock requirement replacement if doing so.
+                            if (replacingEntities)
+                            {
+                                if (requirement.m_Prefab == transportationServiceEntity)
+                                {
+                                    _log.Debug($"  Swapping transportation service requirement for {entityPrefabName} {entity}");
+                                    requirement.m_Prefab = milestone4Entity;
+                                    unlockRequirements[i] = requirement;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -125,13 +246,16 @@ namespace HistoricalStart
 
             // Set log.
             _log = Mod.Instance.Log;
-            _log.Info("OnCreate");
 
             // Get system references.
             _prefabSystem = World.GetOrCreateSystemManaged<PrefabSystem>();
 
-            // Set up query.
-            _lockedQuery = SystemAPI.QueryBuilder().WithAllRW<Locked>().Build();
+            // Set up queries.
+            _lockedQuery = SystemAPI.QueryBuilder().WithAllRW<Locked>().WithAll<PrefabData>().Build();
+            _serviceQuery = SystemAPI.QueryBuilder().WithAll<ServiceData>().Build();
+            _milestoneQuery = SystemAPI.QueryBuilder().WithAll<MilestoneData>().Build();
+            RequireForUpdate(_serviceQuery);
+            RequireForUpdate(_milestoneQuery);
             RequireForUpdate(_lockedQuery);
         }
 
@@ -141,9 +265,10 @@ namespace HistoricalStart
         /// <param name="entity">Entity to unlock.</param>
         private void Unlock(Entity entity)
         {
-            // Unlock entity and remove unlock requirements.
-            EntityManager.RemoveComponent<UnlockRequirement>(entity);
-            EntityManager.RemoveComponent<Locked>(entity);
+            // Unlock via unock event.
+            EntityArchetype m_UnlockEventArchetype = EntityManager.CreateArchetype(ComponentType.ReadWrite<Game.Common.Event>(), ComponentType.ReadWrite<Unlock>());
+            Entity e = EntityManager.CreateEntity(m_UnlockEventArchetype);
+            EntityManager.AddComponentData(e, new Game.Prefabs.Unlock(entity));
 
             // Reduce XP gain.
             if (EntityManager.TryGetComponent(entity, out PlaceableObjectData placeableData))
@@ -159,6 +284,25 @@ namespace HistoricalStart
                 placeableData.m_XPReward /= 10;
                 EntityManager.SetComponentData(entity, serviceData);
             }
+        }
+
+        /// <summary>
+        /// Attempts to get the prefab name associated with a given entity.
+        /// </summary>
+        /// <param name="entity">Entity.</param>
+        /// <returns>Entity prefab name, or <see cref="string.Empty"/> if the entity doesn't contain a prefab or the prefab reference was invalid.</returns>
+        private string GetEntityPrefab(Entity entity)
+        {
+            if (EntityManager.TryGetComponent(entity, out PrefabData entityPrefabData)
+                    && entityPrefabData.m_Index > 0
+                    && _prefabSystem.GetPrefab<PrefabBase>(entityPrefabData) is PrefabBase entityPrefab
+                    && !string.IsNullOrEmpty(entityPrefab.name))
+            {
+                return entityPrefab.name;
+            }
+
+            // If we got here, we failed.
+            return string.Empty;
         }
     }
 }

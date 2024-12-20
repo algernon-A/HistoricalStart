@@ -62,7 +62,7 @@ namespace HistoricalStart
             Localization.LoadTranslations(ActiveSettings, Log);
 
             // Load saved settings.
-            AssetDatabase.global.LoadSettings("529TileSettings", ActiveSettings, new ModSettings(this));
+            AssetDatabase.global.LoadSettings("HistoricalStartSettings", ActiveSettings, new ModSettings(this));
 
             // Enable system.
             updateSystem.UpdateAfter<HistoricalStartSystem>(SystemUpdatePhase.Deserialize);

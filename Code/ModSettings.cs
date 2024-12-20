@@ -27,6 +27,46 @@ namespace HistoricalStart
         }
 
         /// <summary>
+        /// Gets or sets a value indicating whether trams should be unlocked on load.
+        /// </summary>
+        public bool UnlockTrams { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether railways should be unlocked on load.
+        /// </summary>
+        public bool UnlockTrains { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether ships should be unlocked on load.
+        /// </summary>
+        public bool UnlockShips { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether advanced farming should be unlocked on load.
+        /// </summary>
+        public bool UnlockFarming { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether ore and coal extraction should be unlocked on load.
+        /// </summary>
+        public bool UnlockMining { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether oil extraction should be unlocked on load.
+        /// </summary>
+        public bool UnlockOil { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether basic highways should be unlocked on load.
+        /// </summary>
+        public bool UnlockBasicHighways { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether all highways should be unlocked on load.
+        /// </summary>
+        public bool UnlockAllHighways { get; set; }
+
+        /// <summary>
         /// Sets a value indicating whether the mod's settings should be reset.
         /// </summary>
         [XmlIgnore]
@@ -50,6 +90,14 @@ namespace HistoricalStart
         /// </summary>
         public override void SetDefaults()
         {
+            UnlockTrams = false;
+            UnlockTrains = true;
+            UnlockShips = true;
+            UnlockFarming = true;
+            UnlockMining = false;
+            UnlockOil = false;
+            UnlockBasicHighways = true;
+            UnlockAllHighways = false;
         }
     }
 }
