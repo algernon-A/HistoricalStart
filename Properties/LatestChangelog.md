@@ -1,5 +1,1 @@
-- Add options panel for customizable unlocking.
-- Add support for unlocking buses, trams, and highways.
-- Add generic support for region packs, DLC, and custom content.
-- Unlock transportation overview if any public transportation is unlocked.
-- Rework backend unlocking mechanism and target identification.
+- Add Chinese (simplified) translations.

@@ -34,19 +34,15 @@ Safe to remove at any time.  Anything that's been unlocked in a save will remain
 ### Modders
 Modders (and aspiring modders!), as always I'm available and happy to chat about what I've done and answer any questions, and also about how you can implement anything that I've done for your own mods.  Come grab me on the Cities: Skylines Modding Discord!</LongDescription>
   <Thumbnail Value="Properties/Thumbnail.png" />
-  <Screenshot Value="Properties/Thumbnail.png" />
+  <Screenshot Value="Properties/Screenshots/Options.jpg" />
   <Screenshot Value="Properties/Screenshots/SpecializedIndustry.jpg" />
   <Screenshot Value="Properties/Screenshots/RailTransportation.jpg" />
   <Tag Value="Code Mod" />
   <ForumLink Value="https://forum.paradoxplaza.com/forum/threads/historical-start.1644737/" />
-  <ModVersion Value="2.0" />
+  <ModVersion Value="2.0.0.1" />
   <GameVersion Value="1.2.*" />
   <Dependency Id="" DisplayName="" Version="" />
-  <ChangeLog>- Add options panel for customizable unlocking.
-- Add support for unlocking buses, trams, and highways.
-- Add generic support for region packs, DLC, and custom content.
-- Unlock transportation overview if any public transportation is unlocked.
-- Rework backend unlocking mechanism and target identification.</ChangeLog>
+  <ChangeLog>- Add Chinese (simplified) translations.</ChangeLog>
   <ExternalLink Type="github" Url="https://github.com/algernon-A/HistoricalStart" />
   <ExternalLink Type="discord" Url="https://discord.gg/HTav7ARPs2" />
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/historical-start-cs2" />

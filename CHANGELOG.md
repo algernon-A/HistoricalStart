@@ -1,3 +1,6 @@
+### 2.0.0.1
+- Add Chinese (simplified) translations.
+
 ### 2.0
 - Add options panel for customizable unlocking.
 - Add support for unlocking buses, trams, and highways.
