@@ -1,1 +1,1 @@
-- Add Chinese (simplified) translations.
+- Add Polish translations.

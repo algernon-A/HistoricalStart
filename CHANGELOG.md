@@ -1,3 +1,6 @@
+### 2.0.0.2
+- Add Polish translations.
+
 ### 2.0.0.1
 - Add Chinese (simplified) translations.
 
