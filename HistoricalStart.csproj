@@ -6,10 +6,10 @@
 		<Authors>algernon</Authors>
 		<Copyright>Copyright © 2023-25 algernon</Copyright>
 		<Product>$(Title)</Product>
-		<Version>2.0.0.2</Version>
+		<Version>2.0.1</Version>
 		<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<TargetFramework>net472</TargetFramework>
+		<TargetFramework>net48</TargetFramework>
 		<LangVersion>9.0</LangVersion>
 		<Configurations>Debug;Release</Configurations>
 		<PublishConfigurationPath>Properties\PublishConfiguration.xml</PublishConfigurationPath>

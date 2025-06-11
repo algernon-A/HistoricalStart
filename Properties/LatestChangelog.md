@@ -1,1 +1,1 @@
-- Add Polish translations.
+- Compatibility with game version 1.3.3.

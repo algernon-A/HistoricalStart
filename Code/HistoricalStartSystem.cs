@@ -150,7 +150,7 @@ namespace HistoricalStart
                     case "Highway Twoway - 3 lanes":
                         if (unlockBasicHighways)
                         {
-                            _log.Info($"Unlocking basic highway {entityPrefabName} {entity}");
+                            _log.Info($"Unlocking basic highway {entityPrefabName} ({entity})");
                             Unlock(entity);
                         }
 
@@ -159,6 +159,8 @@ namespace HistoricalStart
 
                 if (unlockingTransport | unlockAllHighways)
                 {
+                    _log.Debug($"Checking requirements for {entityPrefabName} {entity}");
+
                     // Get unlock requirements and iterate through.
                     if (EntityManager.TryGetBuffer(entity, true, out DynamicBuffer<UnlockRequirement> unlockRequirements))
                     {
@@ -205,6 +207,7 @@ namespace HistoricalStart
                                 case "Train Track Built Req":
                                 case "Passenger Train Station Built Req":
                                 case "Cargo Train Terminal Built Req":
+                                case "Rail Yard Built Req":
                                     if (unlockTrains)
                                     {
                                         _log.Info($"Unlocking rail prefab {entityPrefabName} {entity}");

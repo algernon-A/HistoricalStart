@@ -1,3 +1,6 @@
+### 2.0.1
+- Compatibility with game version 1.3.3.
+
 ### 2.0.0.2
 - Add Polish translations.
 
