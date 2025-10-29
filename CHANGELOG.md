@@ -1,3 +1,6 @@
+### 2.0.2
+- Compatibility with game version 1.3.6.
+
 ### 2.0.1
 - Compatibility with game version 1.3.3.
 
