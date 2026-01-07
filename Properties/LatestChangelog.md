@@ -1,1 +1,1 @@
-- Compatibility with game version 1.3.6.
+- Add support for unlocking districts.

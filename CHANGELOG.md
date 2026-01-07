@@ -1,3 +1,6 @@
+### 2.1
+- Add support for unlocking districts.
+
 ### 2.0.2
 - Compatibility with game version 1.3.6.
 
