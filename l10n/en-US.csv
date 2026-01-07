@@ -18,5 +18,7 @@
 "Options.OPTION_DESCRIPTION:UnlockBasicHighways","Unlocks smaller two-way highways."
 "Options.OPTION:UnlockAllHighways","Unlock all highways"
 "Options.OPTION_DESCRIPTION:UnlockAllHighways","Unlocks all highways."
+"Options.OPTION:UnlockDistricts","Unlock districts"
+"Options.OPTION_DESCRIPTION:UnlockDistricts","Unlocks the ability to draw districts and assign services.  This does not unlock district policies."
 "Options.OPTION_DESCRIPTION:ResetModSettings","Resets all Historical Start mod settings to default"
 "Options.WARNING:ResetModSettings","Reset all Historical Start settings to default?  This cannot be undone."

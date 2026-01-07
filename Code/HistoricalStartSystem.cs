@@ -45,6 +45,7 @@ namespace HistoricalStart
             bool unlockAllHighways = currentSettings.UnlockAllHighways;
             bool unlockingProduction = unlockFarming | unlockMining | unlockOil;
             bool unlockingTransport = unlockBus | unlockTrams | unlockTrains | unlockShips;
+            bool unlockDistricts = currentSettings.UnlockDistricts;
 
             // Entity references.
             Entity transportationServiceEntity = Entity.Null;
@@ -151,6 +152,15 @@ namespace HistoricalStart
                         if (unlockBasicHighways)
                         {
                             _log.Info($"Unlocking basic highway {entityPrefabName} ({entity})");
+                            Unlock(entity);
+                        }
+
+                        continue;
+
+                    case "District Area":
+                        if (unlockDistricts)
+                        {
+                            _log.Info($"Unlocking district prefab {entityPrefabName} {entity}");
                             Unlock(entity);
                         }
 

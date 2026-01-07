@@ -73,6 +73,11 @@ namespace HistoricalStart
         public bool UnlockAllHighways { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether districts should be unlocked on load.
+        /// </summary>
+        public bool UnlockDistricts { get; set; }
+
+        /// <summary>
         /// Sets a value indicating whether the mod's settings should be reset.
         /// </summary>
         [XmlIgnore]
@@ -105,6 +110,7 @@ namespace HistoricalStart
             UnlockOil = false;
             UnlockBasicHighways = true;
             UnlockAllHighways = false;
+            UnlockDistricts = false;
         }
     }
 }
