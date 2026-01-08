@@ -18,5 +18,7 @@
 "Options.OPTION_DESCRIPTION:UnlockBasicHighways","Desbloquea autopistas bidireccionales de dos carriles."
 "Options.OPTION:UnlockAllHighways","Desbloquear todas las autopistas"
 "Options.OPTION_DESCRIPTION:UnlockAllHighways","Desbloquea todas las autopistas."
+"Options.OPTION:UnlockDistricts","Unlock districts"
+"Options.OPTION_DESCRIPTION:UnlockDistricts","Unlocks the ability to draw districts and assign services.  This does not unlock district policies."
 "Options.OPTION_DESCRIPTION:ResetModSettings","Restablece los ajustes del mod a sus valores por defecto"
 "Options.WARNING:ResetModSettings","¿Seguro de restablecer los ajustes del mod a sus valores por defecto? Esta acción no se puede deshacer."

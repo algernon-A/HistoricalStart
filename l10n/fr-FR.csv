@@ -18,5 +18,7 @@
 "Options.OPTION_DESCRIPTION:UnlockBasicHighways","Déverrouille les autoroutes à deux voies."
 "Options.OPTION:UnlockAllHighways","Débloquer tous les autoroutes"
 "Options.OPTION_DESCRIPTION:UnlockAllHighways","Déverrouille tous les types dʼautoroutes."
+"Options.OPTION:UnlockDistricts","Unlock districts"
+"Options.OPTION_DESCRIPTION:UnlockDistricts","Unlocks the ability to draw districts and assign services.  This does not unlock district policies."
 "Options.OPTION_DESCRIPTION:ResetModSettings","Réinitialise tous les paramètres du mod à leur valeur par défaut."
 "Options.WARNING:ResetModSettings","Réinitialiser tous les paramètres de Historical Start à leur valeur par défaut ? Cette action est irréversible."

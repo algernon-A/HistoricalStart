@@ -18,5 +18,7 @@
 "Options.OPTION_DESCRIPTION:UnlockBasicHighways","解锁小型双向公路"
 "Options.OPTION:UnlockAllHighways","解锁所有公路"
 "Options.OPTION_DESCRIPTION:UnlockAllHighways","解锁所有公路"
+"Options.OPTION:UnlockDistricts","Unlock districts"
+"Options.OPTION_DESCRIPTION:UnlockDistricts","Unlocks the ability to draw districts and assign services.  This does not unlock district policies."
 "Options.OPTION_DESCRIPTION:ResetModSettings","重置 历史开局 模组的设置为默认值"
 "Options.WARNING:ResetModSettings","确定要重置 历史开局 模组的设置吗？此操作无法撤销。"

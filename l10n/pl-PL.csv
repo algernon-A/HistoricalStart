@@ -18,5 +18,7 @@
 "Options.OPTION_DESCRIPTION:UnlockBasicHighways","Odblokowuje małe autostrady dwukierunkowe."
 "Options.OPTION:UnlockAllHighways","Odblokuj wszystkie autostrady"
 "Options.OPTION_DESCRIPTION:UnlockAllHighways","Odblokowuje wszystkie autostrady."
+"Options.OPTION:UnlockDistricts","Odblokuj dzielnice"
+"Options.OPTION_DESCRIPTION:UnlockDistricts","Odblokowuje możliwość tworzenia dzielnic i przypisywania usług. To nie odblokuje przepisów dzielnic."
 "Options.OPTION_DESCRIPTION:ResetModSettings","Resetuje wszystkie ustawienia modyfikacji Historical Start do wartości domyślnych"
 "Options.WARNING:ResetModSettings","Przywrócić ustawienia moda Historical Startdo ustawień domyślnych? Tej czynności nie można cofnąć."
