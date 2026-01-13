@@ -9,6 +9,7 @@ Enables more historical city building when using the game's unlocking progressio
 1. **Advanced farming** (vegetables and cotton)
 1. **Mining*** (coal and ore)
 1. **Oil drilling**
+1. **Districts**
 
 Supporting features will also be unlocked where appropriate, for example:
 1. The **Transportation budget**
