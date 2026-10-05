@@ -1,1 +1,1 @@
-- Add support for unlocking districts.
+- Update translations.

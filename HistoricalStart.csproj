@@ -6,7 +6,7 @@
 		<Authors>algernon</Authors>
 		<Copyright>Copyright © 2023-26 algernon</Copyright>
 		<Product>$(Title)</Product>
-		<Version>2.1</Version>
+		<Version>2.1.1</Version>
 		<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
 		<LangVersion>9.0</LangVersion>
 		<Configurations>Debug;Release</Configurations>
@@ -28,6 +28,11 @@
 
 	<ItemGroup>
 		<EmbeddedResource Include="l10n\en-US.csv" />
+		<EmbeddedResource Include="l10n\es-ES.csv" />
+		<EmbeddedResource Include="l10n\fr-FR.csv" />
+		<EmbeddedResource Include="l10n\ko-KR.csv" />
+		<EmbeddedResource Include="l10n\nl-NL.csv" />
+		<EmbeddedResource Include="l10n\pl-PL.csv" />
 		<EmbeddedResource Include="l10n\zh-HANS.csv" />
 	</ItemGroup>
 	
