@@ -41,7 +41,7 @@ Modders (and aspiring modders!), as always I'm available and happy to chat about
   <Tag Value="Code Mod" />
   <ForumLink Value="https://forum.paradoxplaza.com/forum/threads/historical-start.1644737/" />
   <ModVersion Value="2.1.1" />
-  <GameVersion Value="1.5.*" />
+  <GameVersion Value="1.6.*" />
   <Dependency Id="" DisplayName="" Version="" />
   <ChangeLog>- Update translations.</ChangeLog>
   <ExternalLink Type="github" Url="https://github.com/algernon-A/HistoricalStart" />
